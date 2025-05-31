@@ -31,8 +31,8 @@ def embed_and_store(
     for i, chunk in enumerate(chunks):
         if isinstance(chunk, str):
             texts.append(chunk)
-            metadata.appeng({
-                "'source": chunk.get("source", "unknown"),
+            metadata.append({
+                "source": chunk.get("source", "unknown"),
                 "chunk_id": chunk.get("chunk_id", str(i))
             })
         else:
@@ -50,3 +50,6 @@ def embed_and_store(
         ids=ids
     )
     print(f"✅ Stored {len(texts)} chunks in Pinecone index: '{index_name}'")
+    print(index.describe_index_stats())
+
+    
